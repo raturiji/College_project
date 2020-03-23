@@ -39,8 +39,14 @@
             
             </ul>
             <div class="nav-btn">
+                {% if current_user.is_authenticated %}
+                    <a>{{ current_user.email }}</a>
+                    <a href="{{ url_for('logout') }}">LogOut</a>
+                {% else %}
                 <a href="{{ url_for('login') }}" >Sign In</a>
                 <a href="{{ url_for('register') }}">Post Ad</a>
+                {% endif %}
+                
             </div>
         </div>
     </nav>

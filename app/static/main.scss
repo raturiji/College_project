@@ -1,7 +1,29 @@
-@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/bootstrap/scss/bootstrap";
 
 body{
-   
+    .alert_success{
+        padding:22px;
+        background-color:mediumseagreen;
+        
+
+    }
+
+    .alert_success h4{
+        text-align:center;
+        margin:0;
+    }
+
+    .alert_danger{
+        padding:22px;
+        background-color:mediumseagreen;
+        
+
+    }
+
+    .alert_danger h4{
+        text-align:center;
+        margin:0;
+    }
     nav{
         background-color:red;
             .nav-btn a{

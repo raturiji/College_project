@@ -10764,6 +10764,26 @@ a.text-dark:hover, a.text-dark:focus {
   }
 }
 
+body .alert_success {
+  padding: 22px;
+  background-color: mediumseagreen;
+}
+
+body .alert_success h4 {
+  text-align: center;
+  margin: 0;
+}
+
+body .alert_danger {
+  padding: 22px;
+  background-color: mediumseagreen;
+}
+
+body .alert_danger h4 {
+  text-align: center;
+  margin: 0;
+}
+
 body nav {
   background-color: red;
 }

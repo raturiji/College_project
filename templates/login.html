@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content">
+        <form action="" method="POST" class="login">
+            <h1>Login</h1>
+
+            {{ form.hidden_tag() }}
+
+            <label>Email</label>
+            {% if form.email.errors %}
+                {{ form.email(class='error') }}
+                {% for error in form.email.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% else %}
+                {{ form.email(placeholder='Enter your Email') }}</br>
+            {% endif %}
+
+            <label>Password</label>
+            {% if form.password.errors %}
+                {{ form.password(class='error',placeholder='Enter your Password') }}
+                {% for error in form.password.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% else %}
+                {{ form.password }}</br>
+            {% endif %}
+
+            {{ form.submit(class='first') }}
+            <div class="form-overlay">
+        </form>
+        
+            
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,77 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="content">
+        <form action="" method="POST" class="register">
+            <h1>Sign Up</h1>
+
+            {{ form.hidden_tag() }}
+
+            <label>First Name</label>
+            {% if form.first_name.errors %}
+                {{ form.first_name(class='error') }}
+                {% for error in form.first_name.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% else %}
+                {{ form.first_name }}</br>
+            {% endif %}
+
+
+            <label>Last Name</label>
+            {% if form.last_name.errors %}
+                {{ form.last_name(class='error') }}
+                {% for error in form.last_name.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% else %}
+                {{ form.last_name }}</br>
+            {% endif %}
+
+            <label>Email</label>
+            {% if form.email.errors %}
+                {{ form.email(class='error') }}
+                {% for error in form.email.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% else %}
+                {{ form.email }}</br>
+            {% endif %}
+
+            
+
+            <label>Contact No.</label>
+            {% if form.phone_number.errors %}
+                {{ form.phone_number(class='error') }}
+                {% for error in form.phone_number.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% else %}
+                {{ form.phone_number(class="error") }}</br>
+            {% endif %}
+
+            <label>Password</label>
+            {% if form.password.errors %}
+                {{ form.password(class='error') }}
+                {% for error in form.password.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% else %}
+                {{ form.password }}</br>
+            {% endif %}
+
+            <label>Confirm Password</label>
+            {% if form.confirm_password.errors %}
+                {{ form.confirm_password(class='error') }}
+                {% for error in form.confirm_password.errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            {% else %}
+                {{ form.confirm_password }}</br>
+            {% endif %}
+
+            {{ form.submit(class='first') }}
+
+            <div class="form-overlay"></div>
+        </form>
+    </div>
+{% endblock %}

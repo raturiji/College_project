@@ -10930,4 +10930,73 @@ body .content form .form-overlay {
   top: 0px;
   z-index: -1000;
 }
+
+body .dashboard ul {
+  width: 20%;
+  background-color: black;
+}
+
+body .dashboard ul li {
+  margin: 10px 20px;
+}
+
+body .dashboard ul li a {
+  color: white;
+  font-size: 20px;
+}
+
+body .dashboard .main {
+  width: 80%;
+  background-color: #e3e3e3;
+  height: 800px;
+}
+
+body .dashboard #drop-area {
+  border: 2px dashed #ccc;
+  border-radius: 20px;
+  width: 480px;
+  font-family: sans-serif;
+  margin: 100px auto;
+  padding: 20px;
+}
+
+body .dashboard #drop-area.highlight {
+  border-color: purple;
+}
+
+body .dashboard p {
+  margin-top: 0;
+}
+
+body .dashboard .my-form {
+  margin-bottom: 10px;
+}
+
+body .dashboard #gallery {
+  margin-top: 10px;
+}
+
+body .dashboard #gallery img {
+  width: 150px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+body .dashboard .button {
+  display: inline-block;
+  padding: 10px;
+  background: #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+body .dashboard .button:hover {
+  background: #ddd;
+}
+
+body .dashboard #fileElem {
+  display: none;
+}
 /*# sourceMappingURL=main.css.map */

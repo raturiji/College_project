@@ -1,4 +1,4 @@
-from flask import render_template,url_for,flash,redirect
+from flask import render_template,url_for,flash,request,redirect
 from app import app, db , bcrypt
 from app.form import RegistrationForm,LoginForm
 from app.models import User
@@ -19,7 +19,7 @@ def login():
         print(user.password)
         if user and  bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
-            return redirect(url_for('home'))
+            return redirect(url_for('dashboard'))
         else:
             flash('Login Unsuccessfull! Please check email and password again.', 'danger')
     return render_template('login.html',title='Login',form=form)
@@ -37,6 +37,30 @@ def register():
         flash(f'Account created for {form.first_name.data} successfully','success')
         return redirect(url_for('home'))
     return render_template('register.html',title='Sign Up',form=form)
+
+@app.route('/dashboard',methods=['GET','POST'])
+def dashboard():
+    if(request.method == 'post'):
+        f = request.files.get('file')
+        f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
+        print(app.config['UPLOADED_PATH']+f.filename)
+        print(f)
+    return render_template('dashboard.html')
+
+@app.route('/sidedash')
+def sidedash():
+    return render_template('sidedash.html')
+
+@app.route('/sidepost')
+def sidepost():
+    if(request.method == 'POST'):
+        print(request.files)
+    return render_template('sidepost.html')
+
+@app.route('/sideupdate')
+def sideupdate():
+    return render_template('sideupdate.html')
+
 
 @app.route("/logout")
 def logout():

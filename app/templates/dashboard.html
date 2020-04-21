@@ -1,0 +1,39 @@
+{% extends "layout.html" %} {% block content %}
+<div class="d-flex flex-direction-column dashboard">
+  <ul class="nav navbar-nav side-nav">
+    <li>
+      <a href="investigaciones/favoritas" id="dashboard"
+        ><i class="fa fa-fw fa-user-plus"></i>Dashboard</a
+      >
+    </li>
+    <li>
+      <a href="sugerencias" id="post"
+        ><i class="fa fa-fw fa-paper-plane-o"></i>Post Add</a
+      >
+    </li>
+    <li>
+      <a href="faq" id="update"
+        ><i class="fa fa-fw fa fa-question-circle"></i>Update Profile</a
+      >
+    </li>
+  </ul>
+  {{ dropzone.create(action=url_for('dashboard')) }} {{ dropzone.load_js() }} {{
+  dropzone.config(custom_options='addRemoveLinks: true,
+  allowed_file_type:image',) }}
+  <script>
+    // $('#dashboard').click(() => {
+    //     event.preventDefault()
+    //     $('iframe')[0].src = 'http://127.0.0.1:5000/sidedash'
+    // })
+    // $('#post').click(() => {
+    //     event.preventDefault()
+    //     $('iframe')[0].src = 'http://127.0.0.1:5000/sidepost'
+    // })
+    // $('#update').click(() => {
+    //     event.preventDefault()
+    //     $('iframe')[0].src = 'http://127.0.0.1:5000/sideupdate'
+    // })
+  </script>
+</div>
+
+{% endblock %}

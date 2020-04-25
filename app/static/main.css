@@ -10851,6 +10851,11 @@ body .carousel .carousel-inner .carousel-item .carousel-caption form button {
   border: 0px;
 }
 
+body .dz-progress {
+  /* progress bar covers file name */
+  display: none !important;
+}
+
 body .content {
   background: url(images/2.jpg) no-repeat;
   background-size: cover;

@@ -3,6 +3,7 @@ from app import app, db , bcrypt
 from app.form import RegistrationForm,LoginForm
 from app.models import User
 from flask_login import login_user ,logout_user,current_user
+import os
 
 dummy_user = {'email':'sagar@gmail.com','password':'12345678'}
 @app.route('/')
@@ -40,11 +41,12 @@ def register():
 
 @app.route('/dashboard',methods=['GET','POST'])
 def dashboard():
-    if(request.method == 'post'):
-        f = request.files.get('file')
-        f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
-        print(app.config['UPLOADED_PATH']+f.filename)
-        print(f)
+    if(request.method == 'POST'):
+        
+        for key, f in request.files.items():
+            if(key.startswith('file')):
+                f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
+                return render_template('dashboard.html')
     return render_template('dashboard.html')
 
 @app.route('/sidedash')

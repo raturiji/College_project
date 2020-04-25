@@ -76,6 +76,10 @@ body {
       }
     }
   }
+  .dz-progress {
+    /* progress bar covers file name */
+    display: none !important;
+  }
   .content {
     background: url(images/2.jpg) no-repeat;
     background-size: cover;

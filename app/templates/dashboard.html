@@ -17,10 +17,18 @@
       >
     </li>
   </ul>
-  {{ dropzone.create(action=url_for('dashboard')) }} {{ dropzone.load_js() }} {{
-  dropzone.config(custom_options='addRemoveLinks: true,
-  allowed_file_type:image',) }}
+  <form action="{{ url_for('dashboard') }}" enctype="multipart/form-data" method="post">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title"/><br>
+    <label for="description">Description</label>
+    <input type="text" id="description" name="description"/><br>
+    {{ dropzone.create() }}
+    <input type="submit" id="submit" value="Submit and Upload">
+</form>
+{{ dropzone.load_js() }}
+{{ dropzone.config(custom_options='autoProcessQueue: false, addRemoveLinks: true,progress:false') }}
   <script>
+    $('.dz-progress').hide();
     // $('#dashboard').click(() => {
     //     event.preventDefault()
     //     $('iframe')[0].src = 'http://127.0.0.1:5000/sidedash'
@@ -34,6 +42,7 @@
     //     $('iframe')[0].src = 'http://127.0.0.1:5000/sideupdate'
     // })
   </script>
+  
 </div>
 
 {% endblock %}

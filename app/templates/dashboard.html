@@ -17,16 +17,67 @@
       >
     </li>
   </ul>
-  <form action="{{ url_for('dashboard') }}" enctype="multipart/form-data" method="post">
-    <label for="title">Title</label>
-    <input type="text" id="title" name="title"/><br>
-    <label for="description">Description</label>
-    <input type="text" id="description" name="description"/><br>
-    {{ dropzone.create() }}
-    <input type="submit" id="submit" value="Submit and Upload">
-</form>
-{{ dropzone.load_js() }}
-{{ dropzone.config(custom_options='autoProcessQueue: false, addRemoveLinks: true,progress:false') }}
+  <div class="postAdd" >
+    <h1>Post Add</h1>
+    <form action="{{ url_for('dashboard') }}" enctype="multipart/form-data" method="post">
+      {{ form.hidden_tag() }}
+      <label for="title">Title</label>
+      {% if form.property_type.errors %}
+        {{ form.property_type(class='error') }}
+          {% for error in form.property_type.errors %}
+            <p>{{ error }}</p>
+          {% endfor %}
+        {% else %}
+        {{ form.property_type }}</br>
+      {% endif %}
+      
+      <label for="state">State</label>
+      {% if form.state.errors %}
+        {{ form.state(class='error') }}
+          {% for error in form.state.errors %}
+            <p>{{ error }}</p>
+          {% endfor %}
+        {% else %}
+        {{ form.state }}</br>
+      {% endif %}
+
+      <label for="address">Address</label>
+      {% if form.address.errors %}
+        {{ form.address(class='error') }}
+          {% for error in form.address.errors %}
+            <p>{{ error }}</p>
+          {% endfor %}
+        {% else %}
+        {{ form.address }}</br>
+      {% endif %}
+
+      <label for="description">Description</label>
+      {% if form.description.errors %}
+        {{ form.description(class='error') }}
+          {% for error in form.description.errors %}
+            <p>{{ error }}</p>
+          {% endfor %}
+        {% else %}
+        {{ form.description }}</br>
+      {% endif %}
+
+      <label for="price">Price</label>
+      {% if form.price.errors %}
+        {{ form.price(class='error') }}
+          {% for error in form.price.errors %}
+            <p>{{ error }}</p>
+          {% endfor %}
+        {% else %}
+        {{ form.price }}</br>
+      {% endif %}
+      {{ dropzone.create() }}
+      {{ form.submit(id='submit') }}
+      <input type="submit" id="submit" value="Submit and Upload">
+  </form>
+  {{ dropzone.load_js() }}
+  {{ dropzone.config(custom_options='autoProcessQueue: false, addRemoveLinks: true,progress:false') }}
+  </div>
+  
   <script>
     $('.dz-progress').hide();
     // $('#dashboard').click(() => {

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,PasswordField,SubmitField,TextAreaField,ValidationError
+from wtforms import StringField,PasswordField,SubmitField,TextAreaField,ValidationError,SelectField
 from wtforms.validators import DataRequired,Length,Email,EqualTo
 from app.models import User
 
@@ -27,4 +27,17 @@ class RegistrationForm(FlaskForm):
 class LoginForm(FlaskForm):
     email = StringField('Email',validators=[DataRequired(),Email(),Length(max=50)])
     password = PasswordField('Password',validators=[DataRequired(),Length(min=8,max=20)])
+    submit = SubmitField('Login')
+
+class PostAddForm(FlaskForm):
+    postTypeChoices = [('1-Room Set','1-Room Set'),('2-Room Set','2-Room Set'),('3-Room Set','3-Room Set'),('4-Room Set','4-Room Set')]
+    stateChoices = [('Andhra Pradesh','Andhra Pradesh'),('Arunachal Pradesh','Andhra Pradesh'),('Assam','Assam'),('Bihar','Bihar'),('Chhattisgarh','Chhattisgarh'),('Goa','Goa'),('Gujarat','Gujarat'),('Haryana','Haryana'),
+                    ('Himachal Pradesh','Himachal Pradesh'),('Jammu And Kashmir','Jammu And Kashmir'),('Jharkhand','Jharkhand'),('Karnatka','Karnatka'),('Kerala','Kerala'),('Madhya Pradesh','Madhya Pradesh'),('Maharashtra','Maharashtra'),
+                    ('Manipur','Manipur'),('Meghalaya','Meghalaya'),('Mizoram','Mizoram'),('Nagaland','Nagaland'),('Odisha','Odisha'),('Punjab','Punjab'),('Rajasthan','Rajasthan'),('Sikkim','Sikkim'),('Tamil Nadu','Tamil Nadu'),
+                    ('Telangana','Telangana'),('Tripura','Tripura'),('Uttar Pradesh','Uttar Pradesh'),('Uttarakhand','Uttarakhand'),('West Bengal','West Bengal')]
+    property_type = SelectField(u'Property Type', choices = postTypeChoices, validators = [DataRequired()])
+    state = SelectField(u'State', choices = stateChoices, validators = [DataRequired()])
+    address = TextAreaField('Address',validators = [DataRequired(),Length(max=100)] )
+    description = TextAreaField('Description',validators = [DataRequired(),Length(max=200)] )
+    price = StringField('Price',validators=[DataRequired()])
     submit = SubmitField('Login')

@@ -1,6 +1,6 @@
 from flask import render_template,url_for,flash,request,redirect
 from app import app, db , bcrypt
-from app.form import RegistrationForm,LoginForm
+from app.form import RegistrationForm,LoginForm,PostAddForm
 from app.models import User
 from flask_login import login_user ,logout_user,current_user
 import os
@@ -41,13 +41,13 @@ def register():
 
 @app.route('/dashboard',methods=['GET','POST'])
 def dashboard():
-    if(request.method == 'POST'):
-        
+    form = PostAddForm()
+    if(request.method == 'POST' and form.validate_on_submit()):
         for key, f in request.files.items():
             if(key.startswith('file')):
                 f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
                 return render_template('dashboard.html')
-    return render_template('dashboard.html')
+    return render_template('dashboard.html',title='Dashboard', form=form)
 
 @app.route('/sidedash')
 def sidedash():

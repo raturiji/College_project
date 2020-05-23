@@ -37,7 +37,8 @@ class PostAddForm(FlaskForm):
                     ('Telangana','Telangana'),('Tripura','Tripura'),('Uttar Pradesh','Uttar Pradesh'),('Uttarakhand','Uttarakhand'),('West Bengal','West Bengal')]
     property_type = SelectField(u'Property Type', choices = postTypeChoices, validators = [DataRequired()])
     state = SelectField(u'State', choices = stateChoices, validators = [DataRequired()])
+    city = StringField('Price',validators=[DataRequired()])
     address = TextAreaField('Address',validators = [DataRequired(),Length(max=100)] )
     description = TextAreaField('Description',validators = [DataRequired(),Length(max=200)] )
     price = StringField('Price',validators=[DataRequired()])
-    submit = SubmitField('Login')
+    submit = SubmitField('Submit')

@@ -20,6 +20,7 @@ app.config['DROPZONE_UPLOAD_ON_CLICK']=True
 app.config['DROPZONE_IN_FORM']=True
 app.config['DROPZONE_AUTO_PROCESS_QUEUE'] = False
 app.config['DROPZONE_UPLOAD_ACTION']='dashboard' # URL or endpoint
+app.config['DROPZONE_INPUT_NAME'] = 'files'
 app.config['DROPZONE_UPLOAD_BTN_ID']='submit'
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)

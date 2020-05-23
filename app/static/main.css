@@ -10785,7 +10785,13 @@ body .alert_danger h4 {
 }
 
 body nav {
-  background-color: red;
+  color: white;
+  background-color: black;
+}
+
+body nav img {
+  width: 50px;
+  height: 50px;
 }
 
 body nav .nav-btn a {
@@ -10795,16 +10801,74 @@ body nav .nav-btn a {
   color: white;
 }
 
-body .carousel .carousel-inner {
-  width: 100%;
+body nav .nav-item a:hover {
+  font-size: 30px;
 }
 
-body .carousel .carousel-inner .carousel-item .carousel-caption {
+body .carousel .carousel-inner {
   width: 100%;
-  height: 70px;
-  position: absolute;
-  top: 25%;
-  left: 0px;
+  height: 600px;
+}
+
+body .carousel .carousel-inner .search form input {
+  border-radius: 5px 0 0 5px;
+  border: 0px;
+  padding: 6px;
+  background-color: #464444;
+  color: white;
+  opacity: 0.8;
+}
+
+body .carousel .carousel-inner .search form input::-webkit-input-placeholder {
+  color: white;
+}
+
+body .carousel .carousel-inner .search form input:-ms-input-placeholder {
+  color: white;
+}
+
+body .carousel .carousel-inner .search form input::-ms-input-placeholder {
+  color: white;
+}
+
+body .carousel .carousel-inner .search form input::placeholder {
+  color: white;
+}
+
+body .carousel .carousel-inner .search form select {
+  border-radius: 0px 0px 0px 0px;
+  border: 0px;
+  color: white;
+  background-color: #464444;
+  opacity: 0.8;
+}
+
+body .carousel .carousel-inner .search form select::-webkit-input-placeholder {
+  color: white;
+}
+
+body .carousel .carousel-inner .search form select:-ms-input-placeholder {
+  color: white;
+}
+
+body .carousel .carousel-inner .search form select::-ms-input-placeholder {
+  color: white;
+}
+
+body .carousel .carousel-inner .search form select::placeholder {
+  color: white;
+}
+
+body .carousel .carousel-inner .search form button {
+  width: 100px;
+  background-color: darkred;
+  color: white;
+  border: 0px;
+}
+
+body .post_ad {
+  height: 300px;
+  background-color: #fff900;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -10814,41 +10878,68 @@ body .carousel .carousel-inner .carousel-item .carousel-caption {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-body .carousel .carousel-inner .carousel-item .carousel-caption h1 {
-  width: 80%;
-}
-
-body .carousel .carousel-inner .carousel-item .carousel-caption form {
-  display: -webkit-box;
-  display: -ms-flexbox;
+  margin-top: 50px;
+  margin-bottom: 50px;
   display: flex;
-  width: 70%;
-  height: 50px;
-  margin-left: auto;
 }
 
-body .carousel .carousel-inner .carousel-item .carousel-caption form input {
-  border-radius: 5px 0 0 5px;
-  border: 0px;
-  padding: 8px;
-}
-
-body .carousel .carousel-inner .carousel-item .carousel-caption form select {
-  height: 50px;
+body .post_ad .post {
   width: 150px;
 }
 
-body .carousel .carousel-inner .carousel-item .carousel-caption form button {
+body .post_ad .para {
+  width: 150px;
+}
+
+body .post_ad button {
+  background-color: #fff900;
+  padding: 5px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+body .services {
+  margin-top: 35px;
+  margin-bottom: 35px;
+}
+
+body .services .icon i {
+  font-size: 80px;
+  color: pink;
+  margin-left: 100px;
+}
+
+body footer {
+  background-color: black;
+}
+
+body footer img {
   width: 100px;
-  background-color: darkred;
+  height: 100px;
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
+body footer .social {
+  font-size: 20px;
   color: white;
-  border: 0px;
+}
+
+body footer .social a {
+  color: black;
+  padding: 10px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+body footer .links ul {
+  list-style: none;
+  padding: 0px;
+}
+
+body footer .links ul li {
+  display: inline;
+  color: white;
 }
 
 body .dz-progress {
@@ -10936,9 +11027,13 @@ body .content form .form-overlay {
   z-index: -1000;
 }
 
+body .dashboard {
+  background-color: #e3e3e3;
+}
+
 body .dashboard ul {
   width: 20%;
-  background-color: black;
+  background-color: #003153;
 }
 
 body .dashboard ul li {
@@ -10950,10 +11045,13 @@ body .dashboard ul li a {
   font-size: 20px;
 }
 
-body .dashboard .main {
+body .dashboard .postAdd {
   width: 80%;
   background-color: #e3e3e3;
-  height: 800px;
+}
+
+body .dashboard .postAdd form label {
+  color: grey;
 }
 
 body .dashboard #drop-area {

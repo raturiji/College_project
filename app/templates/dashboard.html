@@ -17,69 +17,114 @@
       >
     </li>
   </ul>
-  <div class="postAdd" >
-    <h1>Post Add</h1>
-    <form action="{{ url_for('dashboard') }}" enctype="multipart/form-data" method="post">
+  <div class="postAdd w-50 mx-auto my-4 " >
+    <h3 class="text-center">Post Add</h3>
+    <form action="{{ url_for('dashboard') }}" enctype="multipart/form-data" method="post" id="postform" class="text-center w-100 form-group row">
       {{ form.hidden_tag() }}
-      <label for="title">Title</label>
-      {% if form.property_type.errors %}
-        {{ form.property_type(class='error') }}
-          {% for error in form.property_type.errors %}
-            <p>{{ error }}</p>
-          {% endfor %}
-        {% else %}
-        {{ form.property_type }}</br>
-      {% endif %}
-      
-      <label for="state">State</label>
-      {% if form.state.errors %}
-        {{ form.state(class='error') }}
-          {% for error in form.state.errors %}
-            <p>{{ error }}</p>
-          {% endfor %}
-        {% else %}
-        {{ form.state }}</br>
-      {% endif %}
+      <div class="form-group col-md-12 row">
+        <label for="title" class="col-sm-2 col-md-2 col-form-label font-weight-bold" >Title</label>
+        <div class="col-sm-10 col-md-10">
+          {% if form.property_type.errors %}
+          {{ form.property_type(class='error') }}
+            {% for error in form.property_type.errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          {% else %}
+          {{ form.property_type(class="form-control") }}</br>
+        {% endif %}
+        </div>
+        
+      </div>
+     
+      <div class="form-group col-md-12 row">
+        <label for="state" class="col-sm-2 col-form-label font-weight-bold">State</label>
+        <div class="col-sm-10 col-md-10">
+          {% if form.state.errors %}
+          {{ form.state(class='error') }}
+            {% for error in form.state.errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          {% else %}
+          {{ form.state(class="form-control") }}</br>
+        {% endif %}
+        </div>
+      </div>
 
-      <label for="address">Address</label>
-      {% if form.address.errors %}
+      <div class="form-group col-md-12 row ">
+        <label for="price" class="col-sm-2 col-form-label font-weight-bold">City</label>
+        <div class="col-sm-10 col-md-10">
+              {% if form.city.errors %}
+            {{ form.city(class='error') }}
+              {% for error in form.city.errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            {% else %}
+            {{ form.city(class="form-control") }}</br>
+          {% endif %}
+        </div>
+      </div>
+      
+      <div class="form-group col-md-12 row ">
+        <label for="address" class="col-sm-2 col-form-label font-weight-bold">Address</label>
+        <div class="col-sm-10 col-md-10">
+          {% if form.address.errors %}
         {{ form.address(class='error') }}
           {% for error in form.address.errors %}
             <p>{{ error }}</p>
           {% endfor %}
         {% else %}
-        {{ form.address }}</br>
+        {{ form.address(class="form-control") }}</br>
       {% endif %}
-
-      <label for="description">Description</label>
-      {% if form.description.errors %}
-        {{ form.description(class='error') }}
-          {% for error in form.description.errors %}
-            <p>{{ error }}</p>
-          {% endfor %}
-        {% else %}
-        {{ form.description }}</br>
-      {% endif %}
-
-      <label for="price">Price</label>
-      {% if form.price.errors %}
-        {{ form.price(class='error') }}
-          {% for error in form.price.errors %}
-            <p>{{ error }}</p>
-          {% endfor %}
-        {% else %}
-        {{ form.price }}</br>
-      {% endif %}
-      {{ dropzone.create() }}
-      {{ form.submit(id='submit') }}
-      <input type="submit" id="submit" value="Submit and Upload">
+        </div>
+      
+      </div>
+      
+      <div class="form-group col-md-12 row ">
+        <label for="description" class="col-sm-2 col-form-label font-weight-bold">Description</label>
+        <div class="col-sm-10 col-md-10">
+          {% if form.description.errors %}
+          {{ form.description(class='error') }}
+            {% for error in form.description.errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          {% else %}
+          {{ form.description(class="form-control") }}</br>
+        {% endif %}
+        </div>
+     
+      </div>
+      
+      <div class="form-group col-md-12 row ">
+        <label for="price" class="col-sm-2 col-form-label font-weight-bold">Price</label>
+        <div class="col-sm-10 col-md-10">
+              {% if form.price.errors %}
+            {{ form.price(class='error') }}
+              {% for error in form.price.errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            {% else %}
+            {{ form.price(class="form-control") }}</br>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-12">
+        {{ dropzone.create(name="drops") }}
+        {{ form.submit(id='submit', class="btn btn-info") }}
+      </div>
+      
   </form>
   {{ dropzone.load_js() }}
   {{ dropzone.config(custom_options='autoProcessQueue: false, addRemoveLinks: true,progress:false') }}
   </div>
   
   <script>
-    $('.dz-progress').hide();
+      // document.getElementById('postform').addEventListener('submit',function(event){
+      //   event.preventDefault()
+      //   console.log(event.target.files)
+      // })
+
+    
+
     // $('#dashboard').click(() => {
     //     event.preventDefault()
     //     $('iframe')[0].src = 'http://127.0.0.1:5000/sidedash'

@@ -25,11 +25,11 @@ class User(db.Model, UserMixin):
 class Property(db.Model, UserMixin):
     id = db.Column(db.Integer,primary_key=True)
     user_id  = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
-    state = db.Column(db.String(25),nullable=False)
-    city = db.Column(db.String(25),nullable=True)
-    address = db.Column(db.String(25),nullable=False)
+    state = db.Column(db.String(25),nullable=False,unique=False)
+    city = db.Column(db.String(25),nullable=False,unique=False)
+    address = db.Column(db.String(25),nullable=False,unique=True)
     description = db.Column(db.String(50),nullable=False,unique=True)
-    price = db.Column(db.String(25),nullable=True,unique=True)
+    price = db.Column(db.String(25),nullable=False,unique=False)
     upload = db.relationship('propertyImages',backref="propertyUpload",lazy=True)
     date_of_creation =  db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
 

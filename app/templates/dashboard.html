@@ -25,9 +25,9 @@
         <label for="title" class="col-sm-2 col-md-2 col-form-label font-weight-bold" >Title</label>
         <div class="col-sm-10 col-md-10">
           {% if form.property_type.errors %}
-          {{ form.property_type(class='error') }}
+          {{ form.property_type(class='error form-control border-danger') }}
             {% for error in form.property_type.errors %}
-              <p>{{ error }}</p>
+              <p class="text-danger">{{ error }}</p>
             {% endfor %}
           {% else %}
           {{ form.property_type(class="form-control") }}</br>
@@ -40,9 +40,9 @@
         <label for="state" class="col-sm-2 col-form-label font-weight-bold">State</label>
         <div class="col-sm-10 col-md-10">
           {% if form.state.errors %}
-          {{ form.state(class='error') }}
+          {{ form.state(class='error form-control border-danger') }}
             {% for error in form.state.errors %}
-              <p>{{ error }}</p>
+              <p class="text-danger">{{ error }}</p>
             {% endfor %}
           {% else %}
           {{ form.state(class="form-control") }}</br>
@@ -54,9 +54,9 @@
         <label for="price" class="col-sm-2 col-form-label font-weight-bold">City</label>
         <div class="col-sm-10 col-md-10">
               {% if form.city.errors %}
-            {{ form.city(class='error') }}
+            {{ form.city(class='error form-control border-danger') }}
               {% for error in form.city.errors %}
-                <p>{{ error }}</p>
+                <p class="text-danger">{{ error }}</p>
               {% endfor %}
             {% else %}
             {{ form.city(class="form-control") }}</br>
@@ -68,9 +68,9 @@
         <label for="address" class="col-sm-2 col-form-label font-weight-bold">Address</label>
         <div class="col-sm-10 col-md-10">
           {% if form.address.errors %}
-        {{ form.address(class='error') }}
+        {{ form.address(class='error form-control border-danger') }}
           {% for error in form.address.errors %}
-            <p>{{ error }}</p>
+            <p class="text-danger">{{ error }}</p>
           {% endfor %}
         {% else %}
         {{ form.address(class="form-control") }}</br>
@@ -83,9 +83,9 @@
         <label for="description" class="col-sm-2 col-form-label font-weight-bold">Description</label>
         <div class="col-sm-10 col-md-10">
           {% if form.description.errors %}
-          {{ form.description(class='error') }}
+          {{ form.description(class='error form-control border-danger') }}
             {% for error in form.description.errors %}
-              <p>{{ error }}</p>
+              <p class="text-danger">{{ error }}</p>
             {% endfor %}
           {% else %}
           {{ form.description(class="form-control") }}</br>
@@ -98,9 +98,9 @@
         <label for="price" class="col-sm-2 col-form-label font-weight-bold">Price</label>
         <div class="col-sm-10 col-md-10">
               {% if form.price.errors %}
-            {{ form.price(class='error') }}
+            {{ form.price(class='error form-control border-danger') }}
               {% for error in form.price.errors %}
-                <p>{{ error }}</p>
+                <p class="text-danger">{{ error }}</p>
               {% endfor %}
             {% else %}
             {{ form.price(class="form-control") }}</br>
@@ -108,13 +108,10 @@
         </div>
       </div>
       <div class="col-md-12">
-        {{ dropzone.create(name="drops") }}
         {{ form.submit(id='submit', class="btn btn-info") }}
       </div>
       
   </form>
-  {{ dropzone.load_js() }}
-  {{ dropzone.config(custom_options='autoProcessQueue: false, addRemoveLinks: true,progress:false') }}
   </div>
   
   <script>

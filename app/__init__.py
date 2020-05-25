@@ -10,7 +10,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 print(basedir)
 app = Flask(__name__)
-app.config['UPLOADED_PATH']=os.path.join(basedir, 'uploads')
+app.config['UPLOADED_PATH']=os.path.join(basedir, 'static/property_images')
 app.config['SECRET_KEY'] = 'b23b76c2836adb89eb1bddb42e761166'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:''@localhost/db_test'
 app.config['DROPZONE_UPLOAD_MULTIPLE'] = True
@@ -19,7 +19,7 @@ app.config['DROPZONE_ALLOWED_FILE_TYPE'] = 'image/*,.jpg'
 app.config['DROPZONE_UPLOAD_ON_CLICK']=True
 app.config['DROPZONE_IN_FORM']=True
 app.config['DROPZONE_AUTO_PROCESS_QUEUE'] = False
-app.config['DROPZONE_UPLOAD_ACTION']='dashboard' # URL or endpoint
+app.config['DROPZONE_UPLOAD_ACTION']='handle_upload' # URL or endpoint
 app.config['DROPZONE_INPUT_NAME'] = 'files'
 app.config['DROPZONE_UPLOAD_BTN_ID']='submit'
 db = SQLAlchemy(app)

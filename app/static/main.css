@@ -11027,6 +11027,23 @@ body .content form .form-overlay {
   z-index: -1000;
 }
 
+body .searchList {
+  background-color: #e3e3e3;
+}
+
+body .searchList .items {
+  margin-left: 250px !important;
+}
+
+body .searchList .items .item {
+  background-color: #fff;
+}
+
+body .searchList .items .item .item-image img {
+  width: 250px;
+  height: 250px;
+}
+
 body .dashboard {
   background-color: #e3e3e3;
 }

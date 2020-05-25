@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField,PasswordField,SubmitField,TextAreaField,ValidationError,SelectField
 from wtforms.validators import DataRequired,Length,Email,EqualTo
-from app.models import User
+from app.models import User,Property
 
 class RegistrationForm(FlaskForm):
     first_name = StringField('First Name',validators=[DataRequired(),Length(max=25)])
@@ -41,4 +41,14 @@ class PostAddForm(FlaskForm):
     address = TextAreaField('Address',validators = [DataRequired(),Length(max=100)] )
     description = TextAreaField('Description',validators = [DataRequired(),Length(max=200)] )
     price = StringField('Price',validators=[DataRequired()])
-    submit = SubmitField('Submit')
+    submit = SubmitField('Submit') 
+
+    def validate_address(self,address):
+        address = Property.query.filter_by(address=address.data).first()
+        if address:
+            raise ValidationError('This address has already been taken. Please use another address')
+    
+    def validate_description(self,description):
+        description = Property.query.filter_by(description=description.data).first()
+        if description:
+            raise ValidationError('This description has already been taken. Please use another description')

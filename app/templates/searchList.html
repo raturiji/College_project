@@ -1,0 +1,165 @@
+{% extends "layout.html" %} {% block content %}
+<div class="searchList d-flex justiyy-content-center w-100 ">
+    <div class="filter col-md-2 bg-light rounded-lg position-fixed m-2">
+        <h5>Apartment Type</h5>
+        <div class="apartment-type d-flex flex-wrap">
+            <small class="p-1 bg-info m-1 rounded-lg text-white">1 BHK</small>
+            <small class="p-1 bg-info m-1 rounded-lg text-white">2 BHK</small>
+            <small class="p-1 bg-info m-1 rounded-lg text-white">3 BHK</small>
+            <small class="p-1 bg-info m-1 rounded-lg text-white">4 BHK</small>
+        </div>
+        <h5>Price Type</h5>
+        <div class="price-type d-flex flex-wrap">
+            <small class="p-1 bg-warning m-1 rounded-lg text-white">Lowest-Highest</small>
+            <small class="p-1 bg-warning m-1 rounded-lg text-white">Highest-Lowest</small>
+        </div>
+        <h5>Tenant</h5>
+        <div class="tenant-type d-flex flex-wrap">
+            <small class="p-1 bg-success m-1 rounded-lg text-white">Family</small>
+            <small class="p-1 bg-success m-1 rounded-lg text-white">Bachelors</small>
+        </div>
+        <small class="p-1 bg-success m-1 rounded-lg text-white">Submit</small>
+    </div>
+    <div class="items col-md-9 d-flex flex-column m-2">
+        <div class="item d-flex justify-content-center">
+            <div class="item-image col-md-4">
+                <img 
+                    src="{{ url_for('static',filename='images/apartment.jpeg') }}""
+                />
+            </div>
+            <div class="item-details m-4 col-md-6">
+                <div class="item-heading">
+                    <h5>2 BHK For rent in Rishikesh</h5>
+                </div>
+                <div class="item-location d-flex">
+                    <small class="p-1 bg-info m-1 rounded-lg text-white">Rishikesh</small>
+                    <small class="p-1 bg-warning m-1 rounded-lg text-white">Uttarakhand</small>
+                    <small class="p-1 bg-success m-1 rounded-lg text-white">Family</small>
+                </div>
+                <div class="item-description">
+                    <h5>Description</h5>
+                    <p class="text-bold">2bhk in center of shivalik nagar,haridwar</p>
+                </div>
+                <div class="item-price">
+                    <h4>&#x20B9 4500</h4>
+                </div>
+            </div>
+        </div>
+        <div class="item d-flex justify-content-center">
+            <div class="item-image col-md-4">
+                <img 
+                    src="{{ url_for('static',filename='images/apartment.jpeg') }}""
+                />
+            </div>
+            <div class="item-details m-4 col-md-6">
+                <div class="item-heading">
+                    <h5>2 BHK For rent in Rishikesh</h5>
+                </div>
+                <div class="item-location d-flex">
+                    <p class="p-2 bg-success text-white rounded-sm mx-2">Uttarakhand</p>
+                    <p class="p-2 bg-info text-white rounded-sm mx-2">Rishikesh</p>
+                </div>
+                <div class="item-description">
+                    <h5>Description</h5>
+                    <p class="text-bold">2bhk in center of shivalik nagar,haridwar</p>
+                </div>
+                <div class="item-price">
+                    <h4>&#x20B9 4500</h4>
+                </div>
+            </div>
+        </div>
+        <div class="item d-flex justify-content-center">
+            <div class="item-image col-md-4">
+                <img 
+                    src="{{ url_for('static',filename='images/apartment.jpeg') }}""
+                />
+            </div>
+            <div class="item-details m-4 col-md-6">
+                <div class="item-heading">
+                    <h5>2 BHK For rent in Rishikesh</h5>
+                </div>
+                <div class="item-location d-flex">
+                    <p class="p-2 bg-success text-white rounded-sm mx-2">Uttarakhand</p>
+                    <p class="p-2 bg-info text-white rounded-sm mx-2">Rishikesh</p>
+                </div>
+                <div class="item-description">
+                    <h5>Description</h5>
+                    <p class="text-bold">2bhk in center of shivalik nagar,haridwar</p>
+                </div>
+                <div class="item-price">
+                    <h4>&#x20B9 4500</h4>
+                </div>
+            </div>
+        </div>
+        <div class="item d-flex justify-content-center">
+            <div class="item-image col-md-4">
+                <img 
+                    src="{{ url_for('static',filename='images/apartment.jpeg') }}""
+                />
+            </div>
+            <div class="item-details m-4 col-md-6">
+                <div class="item-heading">
+                    <h5>2 BHK For rent in Rishikesh</h5>
+                </div>
+                <div class="item-location d-flex">
+                    <p class="p-2 bg-success text-white rounded-sm mx-2">Uttarakhand</p>
+                    <p class="p-2 bg-info text-white rounded-sm mx-2">Rishikesh</p>
+                </div>
+                <div class="item-description">
+                    <h5>Description</h5>
+                    <p class="text-bold">2bhk in center of shivalik nagar,haridwar</p>
+                </div>
+                <div class="item-price">
+                    <h4>&#x20B9 4500</h4>
+                </div>
+            </div>
+        </div>
+        <div class="item d-flex justify-content-center">
+            <div class="item-image col-md-4">
+                <img 
+                    src="{{ url_for('static',filename='images/apartment.jpeg') }}""
+                />
+            </div>
+            <div class="item-details m-4 col-md-6">
+                <div class="item-heading">
+                    <h5>2 BHK For rent in Rishikesh</h5>
+                </div>
+                <div class="item-location d-flex">
+                    <p class="p-2 bg-success text-white rounded-sm mx-2">Uttarakhand</p>
+                    <p class="p-2 bg-info text-white rounded-sm mx-2">Rishikesh</p>
+                </div>
+                <div class="item-description">
+                    <h5>Description</h5>
+                    <p class="text-bold">2bhk in center of shivalik nagar,haridwar</p>
+                </div>
+                <div class="item-price">
+                    <h4>&#x20B9 4500</h4>
+                </div>
+            </div>
+        </div>
+        <div class="item d-flex justify-content-center">
+            <div class="item-image col-md-4">
+                <img 
+                    src="{{ url_for('static',filename='images/apartment.jpeg') }}""
+                />
+            </div>
+            <div class="item-details m-4 col-md-6">
+                <div class="item-heading">
+                    <h5>2 BHK For rent in Rishikesh</h5>
+                </div>
+                <div class="item-location d-flex">
+                    <p class="p-2 bg-success text-white rounded-sm mx-2">Uttarakhand</p>
+                    <p class="p-2 bg-info text-white rounded-sm mx-2">Rishikesh</p>
+                </div>
+                <div class="item-description">
+                    <h5>Description</h5>
+                    <p class="text-bold">2bhk in center of shivalik nagar,haridwar</p>
+                </div>
+                <div class="item-price">
+                    <h4>&#x20B9 4500</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

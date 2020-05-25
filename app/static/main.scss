@@ -207,6 +207,22 @@ body {
       }
     }
   }
+  .searchList{
+    background-color: #e3e3e3;
+    .items{
+      margin-left:250px !important;
+      .item{
+        background-color: #fff;
+        .item-image{
+          img{
+            width:250px;
+            height:250px;
+          }
+        }
+      }
+    }
+    
+  }
   .dashboard {
     background-color: #e3e3e3;
     ul {

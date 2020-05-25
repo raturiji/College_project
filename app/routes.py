@@ -1,9 +1,11 @@
-from flask import render_template,url_for,flash,request,redirect
+from flask import render_template,url_for,flash,request,redirect,session
 from app import app, db , bcrypt
 from app.form import RegistrationForm,LoginForm,PostAddForm
 from app.models import User,Property,propertyImages
 from flask_login import login_user ,logout_user,current_user
 import os
+import time
+import secrets
 
 dummy_user = {'email':'sagar@gmail.com','password':'12345678'}
 @app.route('/')
@@ -39,14 +41,29 @@ def register():
         return redirect(url_for('home'))
     return render_template('register.html',title='Sign Up',form=form)
 
-@app.route('/upload', methods=['POST'])
+@app.route('/search',methods=['GET','POST'])
+def search():
+    return render_template('searchList.html',title='Search')
+
+
+
+@app.route('/upload', methods=['GET','POST'])
 def handle_upload():
-    print(request.form.get('files'))
+    print('working')   
     for key, f in request.files.items():
         if key.startswith('file'):
-            return f.filename
-            # f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
-
+            random_hex = secrets.token_hex(8)
+            _,f_ext = os.path.splitext(f.filename)
+            filename = random_hex + f_ext
+            upload = propertyImages(filename=filename,property_id=session['property_id'],user_id=current_user.id)
+            db.session.add(upload)
+            db.session.commit()
+            f.save(os.path.join(app.config['UPLOADED_PATH'],filename))
+    isUploaded = propertyImages.query.filter_by(property_id=session['property_id']).first()
+    if(isUploaded):
+        flash(f'Post Added Successfully','success')
+        return redirect(url_for('dashboard'))
+    return render_template('handle-upload.html')
 
 @app.route('/dashboard',methods=['GET','POST'])
 def dashboard():
@@ -57,15 +74,8 @@ def dashboard():
         db.session.commit()
         print(form.address.data)
         property_id = Property.query.filter_by(address=form.address.data).first()
-        print(property_id.id)
-        for key, f in request.files.items():
-            print(property_id.id)
-            if key.startswith('file') and property_id.id:
-                print('working')
-                upload = propertyImages(filename=f.filename)
-                db.session.add(upload)
-                db.session.commit()
-                f.save(os.path.join(app.config['UPLOADED_PATH'], f.filename))
+        session['property_id'] = property_id.id
+        return redirect(url_for('handle_upload'))
     return render_template('dashboard.html',title='Dashboard', form=form)
 
 @app.route('/sidedash')

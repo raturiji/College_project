@@ -218,7 +218,27 @@ body {
             width:250px;
             height:250px;
           }
+          .slider{
+            position: absolute;
+            width:250px;
+            h1{
+              cursor: pointer;
+              opacity:0.5;
+            }
+          }
         }
+        .tag{
+          background-color: #29AB87;
+        }
+        .fadeOut{
+          display:none;
+          width:0px;
+          height:0px;
+        }
+        .visible{
+          display:block;
+        }
+
       }
     }
     
@@ -245,7 +265,6 @@ body {
           color:grey
         }
       }
-      
     }
     #drop-area {
       border: 2px dashed #ccc;

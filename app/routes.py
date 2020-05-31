@@ -43,6 +43,16 @@ def register():
 
 @app.route('/search',methods=['GET','POST'])
 def search():
+    if(request.method == "POST"):
+        city = request.form['city']
+        type = request.form['type']
+        budget = request.form['budget']
+        print(city)
+        print(budget)
+        print(type)
+        data = Property.query.filter_by(city=city).all()
+        print(data)
+        return render_template('searchList.html',title='Search',data=data,propertyImages = propertyImages)
     return render_template('searchList.html',title='Search')
 
 
@@ -69,7 +79,7 @@ def handle_upload():
 def dashboard():
     form = PostAddForm()
     if(form.validate_on_submit()):
-        ads = Property(state = form.state.data ,city = form.city.data ,address = form.address.data ,description = form.description.data ,price = form.price.data,user_id=current_user.id)
+        ads = Property(type = form.property_type.data ,state = form.state.data ,city = form.city.data ,tenant = form.tenant.data ,address = form.address.data ,description = form.description.data ,price = form.price.data,user_id=current_user.id)
         db.session.add(ads)
         db.session.commit()
         print(form.address.data)

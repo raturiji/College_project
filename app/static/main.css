@@ -11044,6 +11044,30 @@ body .searchList .items .item .item-image img {
   height: 250px;
 }
 
+body .searchList .items .item .item-image .slider {
+  position: absolute;
+  width: 250px;
+}
+
+body .searchList .items .item .item-image .slider h1 {
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+body .searchList .items .item .tag {
+  background-color: #29AB87;
+}
+
+body .searchList .items .item .fadeOut {
+  display: none;
+  width: 0px;
+  height: 0px;
+}
+
+body .searchList .items .item .visible {
+  display: block;
+}
+
 body .dashboard {
   background-color: #e3e3e3;
 }

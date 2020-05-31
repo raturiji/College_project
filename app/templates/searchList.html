@@ -17,7 +17,7 @@
     </select>
     <button class="border btn btn-primary">Search</button>
   </form>
-<div class="searchList d-flex justiyy-content-center w-100 ">
+<div class="searchList d-flex w-100 ">
     <div class="filter col-md-2 bg-light rounded-lg position-fixed m-2">
         <h5>Apartment Type</h5>
         <div class="apartment-type d-flex flex-wrap">
@@ -36,33 +36,87 @@
             <small class="p-1 bg-success m-1 rounded-lg text-white">Family</small>
             <small class="p-1 bg-success m-1 rounded-lg text-white">Bachelors</small>
         </div>
-        <small class="p-1 bg-success m-1 rounded-lg text-white">Submit</small>
+        <small class="p-1 bg-primary m-1 rounded-lg text-white">Submit</small>
     </div>
     <div class="items col-md-9 d-flex flex-column m-2">
-        <div class="item d-flex justify-content-center">
-            <div class="item-image col-md-4">
+        {% for item in data %}
+        <div class="item d-flex justify-content-center my-2">
+            <div class="item-image d-flex align-items-center">
+                {% for image in propertyImages.query.filter_by(property_id=item.id).all() %}
                 <img 
-                    src="{{ url_for('static',filename='images/apartment.jpeg') }}""
+                    src="{{ url_for('static',filename='property_images/' + image.filename) }}"
+                    class="fadeOut"
                 />
+                {% endfor %}
+                <div class="d-flex justify-content-between text-white slider align-items-center">
+                    <h1 class="p-2 m-0 bg-dark" onclick=prev()><</h1>
+                    <h1 class="p-2 m-0 bg-dark" onclick=next()>></h1>
+                </div>
             </div>
             <div class="item-details m-4 col-md-6">
                 <div class="item-heading">
-                    <h5>2 BHK For rent in Rishikesh</h5>
+                    <h5>{{ item.type }} apartment in {{ item.city }}</h5>
+                </div>
+                <div class="description">
+                    <p>{{item.description}}</p>
                 </div>
                 <div class="item-location d-flex">
-                    <small class="p-1 bg-info m-1 rounded-lg text-white">Rishikesh</small>
-                    <small class="p-1 bg-warning m-1 rounded-lg text-white">Uttarakhand</small>
-                    <small class="p-1 bg-success m-1 rounded-lg text-white">Family</small>
-                </div>
-                <div class="item-description">
-                    <h5>Description</h5>
-                    <p class="text-bold">2bhk in center of shivalik nagar,haridwar</p>
-                </div>
+                    <small class="p-1  m-1 rounded-lg text-white tag">{{item.type}}</small>
+                    <small class="p-1  m-1 rounded-lg text-white tag">{{item.state}}</small>
+                    <small class="p-1  m-1 rounded-lg text-white tag">{{item.city}}</small>
+                    <small class="p-1  m-1 rounded-lg text-white tag">{{item.tenant}}</small>
+                </div>  
                 <div class="item-price">
-                    <h4>&#x20B9 4500</h4>
+                    <h4>&#x20B9 {{item.price}}</h4>
                 </div>
+                <button class="btn-sm btn-danger">Get Owner Details</button>
             </div>
         </div>
+        {% endfor %}
     </div>
 </div>
+<script>
+    function slideShow() {
+        var i;
+        var slides = document.getElementsByClassName("item-image"); 
+        console.log(typeof slides)
+        for (i = 0; i < slides.length; i++) { 
+            console.log(slides[i].children[0].className="visible")
+        } 
+    }
+    slideShow()
+    function prev(){
+        let images = event.target.parentElement.parentElement.children;
+        for (i = 0; i < images.length-1; i++) { 
+            if(images[i].className.indexOf('visible') !== -1 ){
+                if(i == 0){
+                    images[i].className='fadeOut'
+                    i = images.length-2
+                    images[i].className = 'visible'
+                } else{
+                    images[i].className='fadeOut'
+                    images[i-1].className='visible'
+                }
+            }
+        } 
+    }
+    function next(){
+        let images = event.target.parentElement.parentElement.children;
+        for (i = 0; i < images.length-1; i++) { 
+            if(images[i].className.indexOf('visible') !== -1 ){
+                console.log(images.length-2)
+                if(i == images.length-2){
+                    console.log(i,'working')
+                    images[i].className='fadeOut'
+                    i = 0;
+                    images[i].className = 'visible'
+                } else{
+                    images[i].className='fadeOut'
+                    i = i+1
+                    images[i].className='visible'
+                }
+            }
+        } 
+    }
+</script>
 {% endblock %}

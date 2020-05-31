@@ -30,18 +30,32 @@ class LoginForm(FlaskForm):
     submit = SubmitField('Login')
 
 class PostAddForm(FlaskForm):
-    postTypeChoices = [('1-Room Set','1-Room Set'),('2-Room Set','2-Room Set'),('3-Room Set','3-Room Set'),('4-Room Set','4-Room Set')]
-    stateChoices = [('Andhra Pradesh','Andhra Pradesh'),('Arunachal Pradesh','Andhra Pradesh'),('Assam','Assam'),('Bihar','Bihar'),('Chhattisgarh','Chhattisgarh'),('Goa','Goa'),('Gujarat','Gujarat'),('Haryana','Haryana'),
+    postTypeChoices = [('Select','Select'),('1 BHK','1 BHK'),('2 BHK','2 BHK'),('3 BHK','3 BHK'),('4 BHK','4 BHK')]
+    stateChoices = [('Select','Select'),('Andhra Pradesh','Andhra Pradesh'),('Arunachal Pradesh','Andhra Pradesh'),('Assam','Assam'),('Bihar','Bihar'),('Chhattisgarh','Chhattisgarh'),('Goa','Goa'),('Gujarat','Gujarat'),('Haryana','Haryana'),
                     ('Himachal Pradesh','Himachal Pradesh'),('Jammu And Kashmir','Jammu And Kashmir'),('Jharkhand','Jharkhand'),('Karnatka','Karnatka'),('Kerala','Kerala'),('Madhya Pradesh','Madhya Pradesh'),('Maharashtra','Maharashtra'),
                     ('Manipur','Manipur'),('Meghalaya','Meghalaya'),('Mizoram','Mizoram'),('Nagaland','Nagaland'),('Odisha','Odisha'),('Punjab','Punjab'),('Rajasthan','Rajasthan'),('Sikkim','Sikkim'),('Tamil Nadu','Tamil Nadu'),
                     ('Telangana','Telangana'),('Tripura','Tripura'),('Uttar Pradesh','Uttar Pradesh'),('Uttarakhand','Uttarakhand'),('West Bengal','West Bengal')]
+    tenantChoices = [('Select','Select'),('Family','Family'),('Bachelor','Bachelor')]
     property_type = SelectField(u'Property Type', choices = postTypeChoices, validators = [DataRequired()])
     state = SelectField(u'State', choices = stateChoices, validators = [DataRequired()])
     city = StringField('Price',validators=[DataRequired()])
+    tenant = SelectField(u'Tenant', choices = tenantChoices, validators = [DataRequired()])
     address = TextAreaField('Address',validators = [DataRequired(),Length(max=100)] )
     description = TextAreaField('Description',validators = [DataRequired(),Length(max=200)] )
     price = StringField('Price',validators=[DataRequired()])
     submit = SubmitField('Submit') 
+
+    def validate_property_type(self,property_type):
+        if property_type.data == 'Select':
+            raise ValidationError(' Property Type detail is required. Please select a propety type ')
+
+    def validate_state(self,state):
+        if state.data == 'Select':
+            raise ValidationError(' State detail is required. Please select a State ')
+
+    def validate_tenant(self,tenant):
+        if tenant.data == 'Select':
+            raise ValidationError(' Tenant detail is required. Please select a Tenant ')
 
     def validate_address(self,address):
         address = Property.query.filter_by(address=address.data).first()

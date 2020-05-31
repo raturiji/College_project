@@ -25,8 +25,10 @@ class User(db.Model, UserMixin):
 class Property(db.Model, UserMixin):
     id = db.Column(db.Integer,primary_key=True)
     user_id  = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+    type = db.Column(db.String(25),nullable=False,unique=False)
     state = db.Column(db.String(25),nullable=False,unique=False)
     city = db.Column(db.String(25),nullable=False,unique=False)
+    tenant = db.Column(db.String(25),nullable=False,unique=False)
     address = db.Column(db.String(25),nullable=False,unique=True)
     description = db.Column(db.String(50),nullable=False,unique=True)
     price = db.Column(db.String(25),nullable=False,unique=False)

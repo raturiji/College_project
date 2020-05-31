@@ -35,23 +35,23 @@
     <div
       class="search position-absolute w-100 h-100 d-flex justify-content-center align-items-center"
     >
-      <form class="d-flex" action="/searchlist">
-        <input type="text" placeholder="enter your city" />
-        <select class="form-control" id="exampleFormControlSelect1">
-          <option>Property-type</option>
-          <option>1-Room Set</option>
-          <option>2-Room Set</option>
-          <option>3-Room Set</option>
-          <option>4-Room Set</option>
+      <form class="d-flex" action="{{ url_for('search') }}" method="POST">
+        <input type="text" placeholder="enter your city" name="city" />
+        <select class="form-control" name="type">
+          <option value="">Property-type</option>
+          <option value="1 BHK">1 BHK</option>
+          <option value="2 BHK">2 BHK</option>
+          <option value="3 BHK">3 BHK</option>
+          <option value="4 BHK">4 BHK</option>
         </select>
-        <select class="form-control" id="exampleFormControlSelect1">
+        <select class="form-control" name="budget">
           <option>Budget</option>
-          <option>2500-5000</option>
-          <option>5000-7000</option>
-          <option>7000-10000</option>
-          <option>Above 10000</option>
+          <option value="2500-5000">2500-5000</option>
+          <option value="5000-7000">5000-7000</option>
+          <option value="7000-10000">7000-10000</option>
+          <option value="10000">Above 10000</option>
         </select>
-        <button>Search</button>
+        <button type="submit">Search</button>
       </form>
     </div>
   </div>

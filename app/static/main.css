@@ -11086,6 +11086,11 @@ body .dashboard ul li a {
   font-size: 20px;
 }
 
+body .dashboard .impression img {
+  width: 100px;
+  height: 100px;
+}
+
 body .dashboard .postAdd {
   width: 80%;
   background-color: #e3e3e3;

@@ -1,0 +1,154 @@
+{% extends "layout.html" %} {% block content %}
+<div class="d-flex flex-direction-column dashboard">
+  <ul class="nav navbar-nav side-nav">
+    <li>
+      <a href="{{ url_for('dashboard') }}" id="dashboard"
+        ><i class="fa fa-fw fa-user-plus"></i>Dashboard</a
+      >
+    </li>
+    <li>
+      <a href="{{ url_for('postadd') }}" id="post"
+        ><i class="fa fa-fw fa-paper-plane-o"></i>Post Add</a
+      >
+    </li>
+    <li>
+      <a href="faq" id="update"
+        ><i class="fa fa-fw fa fa-question-circle"></i>Update Profile</a
+      >
+    </li>
+  </ul>
+  <div class="postAdd w-50 mx-auto my-4 " >
+    <h3 class="text-center">Post Add</h3>
+    <form action="{{ url_for('dashboard') }}" enctype="multipart/form-data" method="post" id="postform" class="text-center w-100 form-group row">
+      {{ form.hidden_tag() }}
+      <div class="form-group col-md-12 row">
+        <label for="title" class="col-sm-2 col-md-2 col-form-label font-weight-bold" >Property Type</label>
+        <div class="col-sm-10 col-md-10">
+          {% if form.property_type.errors %}
+          {{ form.property_type(class='error form-control border-danger') }}
+            {% for error in form.property_type.errors %}
+              <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+          {% else %}
+          {{ form.property_type(class="form-control") }}</br>
+        {% endif %}
+        </div>
+        
+      </div>
+     
+      <div class="form-group col-md-12 row">
+        <label for="state" class="col-sm-2 col-form-label font-weight-bold">State</label>
+        <div class="col-sm-10 col-md-10">
+          {% if form.state.errors %}
+          {{ form.state(class='error form-control border-danger') }}
+            {% for error in form.state.errors %}
+              <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+          {% else %}
+          {{ form.state(class="form-control") }}</br>
+        {% endif %}
+        </div>
+      </div>
+
+      <div class="form-group col-md-12 row ">
+        <label for="price" class="col-sm-2 col-form-label font-weight-bold">City</label>
+        <div class="col-sm-10 col-md-10">
+              {% if form.city.errors %}
+            {{ form.city(class='error form-control border-danger') }}
+              {% for error in form.city.errors %}
+                <p class="text-danger">{{ error }}</p>
+              {% endfor %}
+            {% else %}
+            {{ form.city(class="form-control") }}</br>
+          {% endif %}
+        </div>
+      </div>
+      
+      <div class="form-group col-md-12 row">
+        <label for="tenant" class="col-sm-2 col-form-label font-weight-bold">Tenant</label>
+        <div class="col-sm-10 col-md-10">
+          {% if form.tenant.errors %}
+          {{ form.tenant(class='error form-control border-danger') }}
+            {% for error in form.tenant.errors %}
+              <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+          {% else %}
+          {{ form.tenant(class="form-control") }}</br>
+        {% endif %}
+        </div>
+      </div>
+      
+      <div class="form-group col-md-12 row ">
+        <label for="address" class="col-sm-2 col-form-label font-weight-bold">Address</label>
+        <div class="col-sm-10 col-md-10">
+          {% if form.address.errors %}
+        {{ form.address(class='error form-control border-danger') }}
+          {% for error in form.address.errors %}
+            <p class="text-danger">{{ error }}</p>
+          {% endfor %}
+        {% else %}
+        {{ form.address(class="form-control") }}</br>
+      {% endif %}
+        </div>
+      </div>
+      
+      <div class="form-group col-md-12 row ">
+        <label for="description" class="col-sm-2 col-form-label font-weight-bold">Description</label>
+        <div class="col-sm-10 col-md-10">
+          {% if form.description.errors %}
+          {{ form.description(class='error form-control border-danger') }}
+            {% for error in form.description.errors %}
+              <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+          {% else %}
+          {{ form.description(class="form-control") }}</br>
+        {% endif %}
+        </div>
+     
+      </div>
+      
+      <div class="form-group col-md-12 row ">
+        <label for="price" class="col-sm-2 col-form-label font-weight-bold">Price</label>
+        <div class="col-sm-10 col-md-10">
+              {% if form.price.errors %}
+            {{ form.price(class='error form-control border-danger') }}
+              {% for error in form.price.errors %}
+                <p class="text-danger">{{ error }}</p>
+              {% endfor %}
+            {% else %}
+            {{ form.price(class="form-control") }}</br>
+          {% endif %}
+        </div>
+      </div>
+      <div class="col-md-12">
+        {{ form.submit(id='submit', class="btn btn-info") }}
+      </div>
+      
+  </form>
+  </div>
+  
+  <script>
+      // document.getElementById('postform').addEventListener('submit',function(event){
+      //   event.preventDefault()
+      //   console.log(event.target.files)
+      // })
+
+    
+
+    // $('#dashboard').click(() => {
+    //     event.preventDefault()
+    //     $('iframe')[0].src = 'http://127.0.0.1:5000/sidedash'
+    // })
+    // $('#post').click(() => {
+    //     event.preventDefault()
+    //     $('iframe')[0].src = 'http://127.0.0.1:5000/sidepost'
+    // })
+    // $('#update').click(() => {
+    //     event.preventDefault()
+    //     $('iframe')[0].src = 'http://127.0.0.1:5000/sideupdate'
+    // })
+  </script>
+  
+</div>
+
+{% endblock %}

@@ -77,6 +77,13 @@ def handle_upload():
 
 @app.route('/dashboard',methods=['GET','POST'])
 def dashboard():
+
+    return render_template('dashboard.html',title='Dashboard')
+
+
+
+@app.route('/postadd',methods=['GET','POST'])
+def postadd():
     form = PostAddForm()
     if(form.validate_on_submit()):
         ads = Property(type = form.property_type.data ,state = form.state.data ,city = form.city.data ,tenant = form.tenant.data ,address = form.address.data ,description = form.description.data ,price = form.price.data,user_id=current_user.id)
@@ -86,7 +93,7 @@ def dashboard():
         property_id = Property.query.filter_by(address=form.address.data).first()
         session['property_id'] = property_id.id
         return redirect(url_for('handle_upload'))
-    return render_template('dashboard.html',title='Dashboard', form=form)
+    return render_template('postadd.html',title='Dashboard', form=form)
 
 @app.route('/sidedash')
 def sidedash():

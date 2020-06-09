@@ -66,3 +66,14 @@ class PostAddForm(FlaskForm):
         description = Property.query.filter_by(description=description.data).first()
         if description:
             raise ValidationError('This description has already been taken. Please use another description')
+
+class SearchForm(FlaskForm):
+    postTypeChoices = [('Select','Select'),('1 BHK','1 BHK'),('2 BHK','2 BHK'),('3 BHK','3 BHK'),('4 BHK','4 BHK')]
+    stateChoices = [('Select','Select'),('Andhra Pradesh','Andhra Pradesh'),('Arunachal Pradesh','Andhra Pradesh'),('Assam','Assam'),('Bihar','Bihar'),('Chhattisgarh','Chhattisgarh'),('Goa','Goa'),('Gujarat','Gujarat'),('Haryana','Haryana'),
+                    ('Himachal Pradesh','Himachal Pradesh'),('Jammu And Kashmir','Jammu And Kashmir'),('Jharkhand','Jharkhand'),('Karnatka','Karnatka'),('Kerala','Kerala'),('Madhya Pradesh','Madhya Pradesh'),('Maharashtra','Maharashtra'),
+                    ('Manipur','Manipur'),('Meghalaya','Meghalaya'),('Mizoram','Mizoram'),('Nagaland','Nagaland'),('Odisha','Odisha'),('Punjab','Punjab'),('Rajasthan','Rajasthan'),('Sikkim','Sikkim'),('Tamil Nadu','Tamil Nadu'),
+                    ('Telangana','Telangana'),('Tripura','Tripura'),('Uttar Pradesh','Uttar Pradesh'),('Uttarakhand','Uttarakhand'),('West Bengal','West Bengal')]
+    property_type = SelectField(u'Property Type', choices = postTypeChoices)
+    state = SelectField(u'State', choices = stateChoices,validators=[DataRequired()])
+    city = StringField('City',validators=[DataRequired()])
+    submit = SubmitField('Submit') 

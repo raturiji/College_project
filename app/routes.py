@@ -3,11 +3,12 @@ from app import app, db , bcrypt
 from app.form import RegistrationForm,LoginForm,PostAddForm
 from app.models import User,Property,propertyImages
 from flask_login import login_user ,logout_user,current_user
+from sqlalchemy import and_
 import os
 import time
 import secrets
 
-dummy_user = {'email':'sagar@gmail.com','password':'12345678'}
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -44,14 +45,13 @@ def register():
 @app.route('/search',methods=['GET','POST'])
 def search():
     if(request.method == "POST"):
-        city = request.form['city']
-        type = request.form['type']
-        budget = request.form['budget']
-        print(city)
-        print(budget)
-        print(type)
-        data = Property.query.filter_by(city=city).all()
-        print(data)
+        print(request.form['type'])
+        print(request.form['state'])
+        print(request.form['city'])
+        if(request.form['type'] == ''):
+            data = Property.query.filter_by(city=request.form['city'],state=request.form['state']).all()
+        else:
+            data = Property.query.filter_by(city=request.form['city'],type=request.form['type']).all()
         return render_template('searchList.html',title='Search',data=data,propertyImages = propertyImages)
     return render_template('searchList.html',title='Search')
 

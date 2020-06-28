@@ -17,13 +17,13 @@
       >
     </li>
   </ul>
-  <div class="postAdd w-50 mx-auto my-4 " >
-    <form action="{{ url_for('handle_upload') }}" enctype="multipart/form-data" method="POST">
+  <div class="postAdd w-50 mx-auto my-4" >
+    <form action="{{ url_for('handle_upload') }}" enctype="multipart/form-data" method="POST" class="d-flex flex-column">
     <h3 class="text-center">Uplaod Files</h3>
     <div class="col-md-12">
         {{ dropzone.create() }}
     </div>
-    <button type="submit" id="submit">Submit</button>
+    <button type="submit" id="submit" class="btn btn-info mx-auto">Submit</button>
   </div>
     </form>
   {{ dropzone.load_js() }}

@@ -3,7 +3,7 @@ from app import app, db , bcrypt
 from app.form import RegistrationForm,LoginForm,PostAddForm
 from app.models import User,Property,propertyImages
 from flask_login import login_user ,logout_user,current_user
-from sqlalchemy import and_
+from sqlalchemy import and_,or_ 
 import os
 import time
 import secrets
@@ -49,9 +49,15 @@ def search():
         print(request.form['state'])
         print(request.form['city'])
         if(request.form['type'] == ''):
-            data = Property.query.filter_by(city=request.form['city'],state=request.form['state']).all()
+            # data = Property.query.filter_by(city=request.form['city'],state=request.form['state']).all()
+            city = "%{}%".format(request.form['city'])
+            state = "%{}%".format(request.form['state'])
+            data = Property.query.filter(and_(Property.city.like(city),Property.state.like(state))).all()
         else:
-            data = Property.query.filter_by(city=request.form['city'],type=request.form['type']).all()
+            city = "%{}%".format(request.form['city'])
+            type = "%{}%".format(request.form['type'])
+            state = "%{}%".format(request.form['state'])
+            data = Property.query.filter(and_(Property.city.like(city),Property.state.like(state),Property.type.like(type))).all()
         return render_template('searchList.html',title='Search',data=data,propertyImages = propertyImages)
     return render_template('searchList.html',title='Search')
 
@@ -77,7 +83,6 @@ def handle_upload():
 
 @app.route('/dashboard',methods=['GET','POST'])
 def dashboard():
-
     return render_template('dashboard.html',title='Dashboard')
 
 

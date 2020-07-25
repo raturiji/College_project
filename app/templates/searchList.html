@@ -44,7 +44,7 @@
   </form>
 <div class="searchList d-flex w-100 ">
     <div class="filter col-md-2 bg-light rounded-lg position-fixed m-2">
-        <h5>Apartment Type</h5>
+        <h5>Apartment Type</h5> 
         <div class="apartment-type d-flex flex-wrap">
             <small class="p-1 bg-info m-1 rounded-lg text-white">1 BHK</small>
             <small class="p-1 bg-info m-1 rounded-lg text-white">2 BHK</small>
@@ -91,17 +91,47 @@
                     <small class="p-1  m-1 rounded-lg text-white tag">{{item.state}}</small>
                     <small class="p-1  m-1 rounded-lg text-white tag">{{item.city}}</small>
                     <small class="p-1  m-1 rounded-lg text-white tag">{{item.tenant}}</small>
+                    <small class="p-1  m-1 rounded-lg text-white tag">{{item.id}}</small>
                 </div>  
                 <div class="item-price">
                     <h4>&#x20B9 {{item.price}}</h4>
                 </div>
-                <a class="btn-sm btn-danger text-white p-2" href="{{ url_for('logout') }}">Get Owner Details</a>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Confirm </h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                        Are you sure you want to send to the request the owner.
+                        </div>
+                        <div class="modal-footer">
+                        <a type="button" class="btn-sm py-1 px-2 text-white btn-secondary" data-dismiss="modal">Cancel</a>
+                        {% set id = item.id | string() %}
+                        <a type="button" class="btn-sm py-1 px-2 text-white btn-primary"  onclick="redirectrequest('{{id}}','{{item.city}}','{{item.state}}')">Send Request</a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <button type="button" class="btn-sm btn-danger text-white" data-toggle="modal" data-target="#exampleModal">
+                   Get Owner Details
+                  </button>
             </div>
         </div>
         {% endfor %}
     </div>
 </div>
 <script>
+
+    function redirectrequest(id,city,state){
+        console.log(id,city,state)
+        window.location.href=`http://127.0.0.1:5000/sendImpression/${id}/${city}/${state}` 
+    }
+
     function slideShow() {
         var i;
         var slides = document.getElementsByClassName("item-image"); 
@@ -144,5 +174,9 @@
             }
         } 
     }
+    // function confirm(){
+    //     <div>
+    //     </div>
+    // }
 </script>
 {% endblock %}

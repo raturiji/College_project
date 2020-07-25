@@ -1,7 +1,7 @@
 from flask import render_template,url_for,flash,request,redirect,session
 from app import app, db , bcrypt
 from app.form import RegistrationForm,LoginForm,PostAddForm
-from app.models import User,Property,propertyImages
+from app.models import User,Property,propertyImages, Impression
 from flask_login import login_user ,logout_user,current_user
 from sqlalchemy import and_,or_ 
 import os
@@ -85,7 +85,25 @@ def handle_upload():
 def dashboard():
     return render_template('dashboard.html',title='Dashboard')
 
+@app.route('/impression')
+def impression():
+    if current_user.is_authenticated:
+        data = Property.query.filter_by(user_id=current_user.id)
+    return render_template('impression.html',data=data,Impression=Impression,User=User)
 
+@app.route('/handleImpression/<int:id>/<string:action>')
+def handleImpression(id,action):
+    if current_user.is_authenticated:
+        print(id)
+        print(action)
+        if action == 'accept':
+            Impression.query.filter_by(id=id).update(dict(status='Accepted'))
+            db.session.commit()
+        else:
+            Impression.query.filter_by(id=id).delete()
+            db.session.commit()
+        data = Property.query.filter_by(user_id=current_user.id)
+    return render_template('impression.html',data=data,Impression=Impression,User=User)
 
 @app.route('/postadd',methods=['GET','POST'])
 def postadd():
@@ -99,6 +117,33 @@ def postadd():
         session['property_id'] = property_id.id
         return redirect(url_for('handle_upload'))
     return render_template('postadd.html',title='Dashboard', form=form)
+
+@app.route('/sendImpression/<string:propertyId>/<string:city>/<string:state>')
+def sendImpression(propertyId,city,state):
+    if current_user.is_authenticated:
+        print(propertyId)
+        print(city)
+        print(state)
+        print(User.id)
+        redirectCity = "%{}%".format(city)
+        redirectState = "%{}%".format(state)
+        data = Property.query.filter(and_(Property.city.like(city),Property.state.like(state))).all()
+        impressions = Impression(user_id=current_user.id, property_id=propertyId, status='Pending')
+        db.session.add(impressions)
+        db.session.commit()
+        flash(f'Your impression has been recorded to the owner','success')
+        return render_template('searchList.html',title='Search',data=data,propertyImages = propertyImages)
+    else:
+        return redirect('home')
+
+# @app.route('/sendImpression')
+# def sendImpression():
+#     if current_user.is_authenticated:
+#         print(propertyId)
+#         print(city)
+#         print(type)
+#     else:
+#         return redirect('home')
 
 @app.route('/sidedash')
 def sidedash():

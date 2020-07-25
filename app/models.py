@@ -33,6 +33,7 @@ class Property(db.Model, UserMixin):
     description = db.Column(db.String(50),nullable=False,unique=True)
     price = db.Column(db.String(25),nullable=False,unique=False)
     upload = db.relationship('propertyImages',backref="propertyUpload",lazy=True)
+    impression = db.relationship('Impression',backref="impressionUser",lazy=True)
     date_of_creation =  db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
 
     def __repr__(self):
@@ -47,3 +48,13 @@ class propertyImages(db.Model, UserMixin):
 
     def __repr__(self):
         return f"Property('{self.filename}'),"
+
+class Impression(db.Model, UserMixin):
+    id = db.Column(db.Integer,primary_key=True)
+    user_id = db.Column(db.Integer,db.ForeignKey('user.id'),nullable=False)
+    property_id = db.Column(db.Integer,db.ForeignKey('property.id'),nullable=False)
+    status = db.Column(db.String(50),nullable=False)
+    date_of_creation =  db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"impression('{self.id},{self.user_id},{self.status}')"

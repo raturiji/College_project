@@ -1,0 +1,57 @@
+{% extends "layout.html" %} {% block content %}
+
+<div class="d-flex flex-direction-column dashboard">
+    <ul class="nav navbar-nav side-nav">
+      <li>
+        <a href="{{ url_for('dashboard') }}" id="dashboard"
+          ><i class="fa fa-fw fa-user-plus"></i>Dashboard</a
+        >
+      </li>
+      <li>
+        <a href="{{ url_for('postadd') }}" id="post"
+        ><i class="fa fa-fw fa-paper-plane-o"></i>Post Add
+        </a>
+      </li>
+      <li>
+        <a href="faq" id="update"
+          ><i class="fa fa-fw fa fa-question-circle"></i>Update Profile</a
+        >
+      </li>
+    </ul>
+    <div class="impressionList w-100">
+        <table class="table w-100">
+            <thead class="bg-info">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">E-Mail</th>
+                    <th scope="col">Property</th>
+                    <th scope="col">Date of Impression</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+              {% for item in data %}
+                {% for impressionItem in Impression.query.filter_by(property_id=item.id).all() %}
+                  {% for userItem in User.query.filter_by(id=item.user_id).all() %}
+                    <tr>
+                      <td>{{ userItem.first_name }} {{ userItem.last_name }}</td>
+                      <td>{{ userItem.email}}</td>
+                      <td>{{ item.address }}</td>
+                      <td>{{ impressionItem.date_of_creation.strftime("%d") }} {{ impressionItem.date_of_creation.strftime("%b") }} {{ impressionItem.date_of_creation.strftime("%Y") }}</td>
+                      <td>{{ impressionItem.status }}</td>
+                      {% if impressionItem.status == 'Pending' %}
+                        <td><a class="small btn-success text-white p-2"  href="{{ url_for('handleImpression',id=impressionItem.id,action='accept') }}">Accept</a> <a class="small small btn-danger text-white p-2"  href="{{ url_for('handleImpression',id=impressionItem.id,action='reject') }}">Reject</a></td>
+                      {% else %}
+                        <td>No Action </td>
+                      {% endif %}
+                      </tr>
+                  {% endfor %}
+                {% endfor %}
+              {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

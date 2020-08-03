@@ -243,6 +243,14 @@ body {
     }
     
   }
+  .fadeOut{
+    display:none;
+    width:0px;
+    height:0px;
+  }
+  .visible{
+    display:block;
+  }
   .dashboard {
     background-color: #e3e3e3;
     ul {

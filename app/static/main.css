@@ -11068,6 +11068,16 @@ body .searchList .items .item .visible {
   display: block;
 }
 
+body .fadeOut {
+  display: none;
+  width: 0px;
+  height: 0px;
+}
+
+body .visible {
+  display: block;
+}
+
 body .dashboard {
   background-color: #e3e3e3;
 }

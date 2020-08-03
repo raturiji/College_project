@@ -91,6 +91,13 @@ def impression():
         data = Property.query.filter_by(user_id=current_user.id)
     return render_template('impression.html',data=data,Impression=Impression,User=User)
 
+@app.route('/updateProperty')
+def updateProperty():
+    if current_user.is_authenticated:
+        data = Property.query.filter_by(user_id=current_user.id).all()
+        return render_template('update-property.html',data=data,propertyImages=propertyImages)
+    return render_template('dashboard.html')
+
 @app.route('/handleImpression/<int:id>/<string:action>')
 def handleImpression(id,action):
     if current_user.is_authenticated:

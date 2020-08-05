@@ -1,0 +1,75 @@
+{% extends "layout.html" %} {% block content %}
+<div class="d-flex flex-direction-column dashboard">
+  <ul class="nav navbar-nav side-nav">
+    <li>
+      <a href="{{ url_for('dashboard') }}" id="dashboard"
+        ><i class="fa fa-fw fa-user-plus"></i>Dashboard</a
+      >
+    </li>
+    <li>
+      <a href="{{ url_for('postadd') }}" id="post"
+        ><i class="fa fa-fw fa-paper-plane-o"></i>Post Add</a
+      >
+    </li>
+    <li>
+      <a href="faq" id="update"
+        ><i class="fa fa-fw fa fa-question-circle"></i>Update Profile</a
+      >
+    </li>
+  </ul>
+  <div class="postAdd w-50 mx-auto my-4 " >
+    <h3 class="text-center">Update Profile</h3>
+    <form enctype="multipart/form-data" method="post" id="postform" class="text-center w-100 form-group row" action="{{ url_for('updateProfile') }}">
+      {{ form.hidden_tag() }}
+      <div class="form-group col-md-12 row">
+        <label for="title" class="col-sm-2 col-md-2 col-form-label font-weight-bold" >First Name</label>
+        <div class="col-sm-10 col-md-10">
+          {% if form.first_name.errors %}
+          {{ form.first_name(class='error form-control border-danger') }}
+            {% for error in form.first_name.errors %}
+              <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+          {% else %}
+          {{ form.first_name(class="form-control" ) }}</br>
+        {% endif %}
+        </div>
+        
+      </div>
+     
+      <div class="form-group col-md-12 row">
+        <label for="state" class="col-sm-2 col-form-label font-weight-bold">Last Name</label>
+        <div class="col-sm-10 col-md-10">
+          {% if form.last_name.errors %}
+          {{ form.last_name(class='error form-control border-danger') }}
+            {% for error in form.last_name.errors %}
+              <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+          {% else %}
+          {{ form.last_name(class="form-control") }}</br>
+        {% endif %}
+        </div>
+      </div>
+
+      <div class="form-group col-md-12 row">
+        <label for="state" class="col-sm-2 col-form-label font-weight-bold">Contact Number</label>
+        <div class="col-sm-10 col-md-10">
+          {% if form.phone_number.errors %}
+          {{ form.phone_number(class='error form-control border-danger') }}
+            {% for error in form.phone_number.errors %}
+              <p class="text-danger">{{ error }}</p>
+            {% endfor %}
+          {% else %}
+          {{ form.phone_number(class="form-control") }}</br>
+        {% endif %}
+        </div>
+      </div>
+      <div class="col-md-12">
+        {{ form.submit(id='submit', class="btn btn-info") }}
+      </div>
+      
+  </form>
+  </div>
+  
+</div>
+
+{% endblock %}

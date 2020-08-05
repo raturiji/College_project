@@ -55,9 +55,7 @@
                         <div class="item-price">
                             <h4>&#x20B9 {{item.price}}</h4>
                         </div>
-                        <button type="button" class="btn-sm btn-danger text-white" data-toggle="modal" data-target="#exampleModal">
-                           Update Property
-                          </button>
+                        <a href="{{ url_for('updatePropertyDetails',id=item.id)}}" class="btn-sm btn-danger">Update Property</a>
                     </div>
                 </div>
                 {% endfor %}

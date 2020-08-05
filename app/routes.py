@@ -1,6 +1,6 @@
 from flask import render_template,url_for,flash,request,redirect,session
 from app import app, db , bcrypt
-from app.form import RegistrationForm,LoginForm,PostAddForm
+from app.form import RegistrationForm,LoginForm,PostAddForm,UpdatePostDetailsForm,UpdateProfileForm
 from app.models import User,Property,propertyImages, Impression
 from flask_login import login_user ,logout_user,current_user
 from sqlalchemy import and_,or_ 
@@ -58,7 +58,7 @@ def search():
             type = "%{}%".format(request.form['type'])
             state = "%{}%".format(request.form['state'])
             data = Property.query.filter(and_(Property.city.like(city),Property.state.like(state),Property.type.like(type))).all()
-        return render_template('searchList.html',title='Search',data=data,propertyImages = propertyImages)
+        return render_template('searchList.html',title='Search',data=data,propertyImages = propertyImages,Impression=Impression,id=current_user.id,User=User)
     return render_template('searchList.html',title='Search')
 
 
@@ -121,6 +121,52 @@ def updateImages(id,status):
         flash(f'Images Update Successfully','success')
         return redirect(url_for('updateProperty'))    
 
+@app.route('/updatePropertyDetails/<int:id>',methods=['GET','POST'])
+def updatePropertyDetails(id):
+    form = UpdatePostDetailsForm()
+    propertyDetails = Property.query.filter_by(id=id).first()
+    if(form.validate_on_submit()):
+        print('reach')
+        print(form.property_type.data)
+        print(form.price.data)
+        propertyDetails.type = form.property_type.data
+        propertyDetails.state = form.state.data 
+        propertyDetails.city = form.city.data 
+        propertyDetails.tenant =  form.tenant.data 
+        propertyDetails.address = form.address.data 
+        propertyDetails.price = form.price.data 
+        propertyDetails.description = form.description.data 
+        print(db.session)
+        db.session.commit()
+        flash(f'Post Update Successfully','success')
+        return redirect(url_for('updateProperty'))
+    form.property_type.data = propertyDetails.type
+    form.state.data = propertyDetails.state
+    form.city.data = propertyDetails.city
+    form.tenant.data = propertyDetails.tenant
+    form.address.data = propertyDetails.address
+    form.price.data = propertyDetails.price
+    form.description.data = propertyDetails.description
+    return render_template('updatePostDetail.html',title='Dashboard',form=form,id=id)
+
+@app.route('/updateProfile',methods=['GET','POST'])
+def updateProfile():
+    form = UpdateProfileForm()
+    userDetails = User.query.filter_by(id=current_user.id).first()
+    if(form.validate_on_submit()):
+        userDetails.first_name = form.first_name.data
+        userDetails.last_name = form.last_name.data
+        userDetails.phone_number = form.phone_number.data 
+        User.query.filter_by(id=current_user.id).update(dict(first_name=form.first_name.data,last_name=form.last_name.data,phone_number=form.phone_number.data))
+        db.session.commit()      
+        flash(f'Profile Update Successfully','success')
+        return redirect(url_for('dashboard'))
+    form.first_name.data = userDetails.first_name
+    form.last_name.data = userDetails.last_name
+    form.phone_number.data = userDetails.phone_number
+    return render_template('updateProfile.html',title='Dashboard',form=form)
+
+
 @app.route('/deleteImage/<int:id>')
 def deleteImage(id):
     if current_user.is_authenticated:
@@ -157,7 +203,7 @@ def postadd():
         return redirect(url_for('handle_upload'))
     return render_template('postadd.html',title='Dashboard', form=form)
 
-@app.route('/sendImpression/<string:propertyId>/<string:city>/<string:state>')
+@app.route('/sendImpression/<int:propertyId>/<string:city>/<string:state>')
 def sendImpression(propertyId,city,state):
     if current_user.is_authenticated:
         print(propertyId)
@@ -167,11 +213,15 @@ def sendImpression(propertyId,city,state):
         redirectCity = "%{}%".format(city)
         redirectState = "%{}%".format(state)
         data = Property.query.filter(and_(Property.city.like(city),Property.state.like(state))).all()
-        impressions = Impression(user_id=current_user.id, property_id=propertyId, status='Pending')
-        db.session.add(impressions)
-        db.session.commit()
-        flash(f'Your impression has been recorded to the owner','success')
-        return render_template('searchList.html',title='Search',data=data,propertyImages = propertyImages)
+        if(Impression.query.filter_by(property_id=propertyId,user_id=current_user.id).first()):
+            return render_template('searchList.html',title='Search',data=data,propertyImages = propertyImages,Impression=Impression,id=current_user.id,User=User)
+        else:
+            impressions = Impression(user_id=current_user.id, property_id=propertyId, status='Pending')
+            db.session.add(impressions)
+            db.session.commit()
+            flash(f'Your impression has been recorded to the owner','success')
+            return render_template('searchList.html',title='Search',data=data,propertyImages = propertyImages,Impression=Impression,id=current_user.id,User=User)
+
     else:
         return redirect('home')
 

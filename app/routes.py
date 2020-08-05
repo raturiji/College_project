@@ -98,6 +98,38 @@ def updateProperty():
         return render_template('update-property.html',data=data,propertyImages=propertyImages)
     return render_template('dashboard.html')
 
+@app.route('/updateImages/<int:id>/<string:status>',methods=['GET','POST'])
+def updateImages(id,status):
+    print('checking')
+    session['property_id'] = id
+    if current_user.is_authenticated:
+        if status=='uploaded':
+            for key, f in request.files.items(): 
+                if key.startswith('file'):
+                    random_hex = secrets.token_hex(8)
+                    _,f_ext = os.path.splitext(f.filename)
+                    filename = random_hex + f_ext
+                    print(id)
+                    print('reach')
+                    upload = propertyImages(filename=filename,property_id=id,user_id=current_user.id)
+                    print(upload)
+                    db.session.add(upload)
+                    db.session.commit()
+                    f.save(os.path.join(app.config['UPLOADED_PATH'],filename))
+        else:
+            return render_template('update-images.html',id=id)
+        flash(f'Images Update Successfully','success')
+        return redirect(url_for('updateProperty'))    
+
+@app.route('/deleteImage/<int:id>')
+def deleteImage(id):
+    if current_user.is_authenticated:
+        print(id)
+        propertyImages.query.filter_by(id=id).delete()
+        db.session.commit()
+        return redirect(url_for('updateProperty'))
+   
+
 @app.route('/handleImpression/<int:id>/<string:action>')
 def handleImpression(id,action):
     if current_user.is_authenticated:

@@ -10909,6 +10909,17 @@ body .services .icon i {
   margin-left: 100px;
 }
 
+body .close {
+  top: 0px;
+  right: 15px;
+  background-color: black;
+  font-size: 10px;
+}
+
+body .separate {
+  border-bottom: 2px solid black;
+}
+
 body footer {
   background-color: black;
 }

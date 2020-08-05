@@ -22,12 +22,12 @@
     <h3 class="text-center">Uplaod Files</h3>
     <div class="col-md-12">
         {{ dropzone.create() }}
-    </div>
+    </div> 
     <button type="submit" id="submit" class="btn btn-info mx-auto">Submit</button>
   </div>
     </form>
   {{ dropzone.load_js() }}
-  {{ dropzone.config(custom_options='autoProcessQueue: false, addRemoveLinks: true,progress:false') }}
+  {{ dropzone.config(custom_options='autoProcessQueue: false, addRemoveLinks: true,progress:false' ) }}
   </div>
   
   <script>

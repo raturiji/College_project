@@ -47,7 +47,7 @@ class propertyImages(db.Model, UserMixin):
     date_of_creation =  db.Column(db.DateTime,nullable=False,default=datetime.utcnow)
 
     def __repr__(self):
-        return f"Property('{self.filename}'),"
+        return f"propertyimages('{self.filename},{self.property_id},{self.user_id}'),"
 
 class Impression(db.Model, UserMixin):
     id = db.Column(db.Integer,primary_key=True)

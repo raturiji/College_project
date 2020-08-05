@@ -110,6 +110,16 @@ body {
       }
     } 
   }
+  .close{
+    top:0px;
+    right:15px;
+    background-color: black;
+    font-size: 10px;
+  }
+  .separate{
+    border-bottom: 2px solid black;
+  }
+
   footer{
     background-color:black;
     img{

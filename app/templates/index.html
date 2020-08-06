@@ -105,54 +105,33 @@
 
   <div class="container">
     <div class="row">
+      {% for featured in featuredProperty %}
       <div
         class="card col-md-4 col-lg-3 col-sm-6 col-xs-12 mx-auto p-0"
         style="width: 18rem;"
       >
+        {% set images = propertyImages.query.filter_by(property_id=featured.id).first() %}
         <img
           class="card-img-top"
-          src="{{ url_for('static',filename='images/3.jpg') }}"
+          src="{{ url_for('static',filename='property_images/' + propertyImages.query.filter_by(property_id=featured.id).first().filename) }}"
           alt="Card image cap"
+          style="height:250px"
         />
         <div class="card-body">
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
+          <div class="item-heading">
+            <h5 class="m-0">{{ featured.type }} apartment in {{ featured.city }}</h5>
+            <small class="text-primary">Posted on {{ featured.date_of_creation.strftime("%d") }} {{ featured.date_of_creation.strftime("%b") }}  {{ featured.date_of_creation.strftime("%Y") }} </small>
+        </div>
+        <div class="description">
+            <p>{{featured.description}}</p>
+        </div> 
+        <div class="item-price">
+            <h4>&#x20B9 {{featured.price}}</h4>
+        </div>
         </div>
       </div>
-      <div
-        class="card col-md-4 col-lg-3 col-sm-6 col-xs-12 mx-auto p-0"
-        style="width: 18rem;"
-      >
-        <img
-          class="card-img-top"
-          src="{{ url_for('static',filename='images/3.jpg') }}"
-          alt="Card image cap"
-        />
-        <div class="card-body">
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div>
-      <div
-        class="card col-md-4 col-lg-3 col-sm-6 col-xs-12 mx-auto p-0"
-        style="width: 18rem;"
-      >
-        <img
-          class="card-img-top"
-          src="{{ url_for('static',filename='images/3.jpg') }}"
-          alt="Card image cap"
-        />
-        <div class="card-body">
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-        </div>
-      </div>
+      {% endfor %}
+    
     </div>
   </div>
 </div>

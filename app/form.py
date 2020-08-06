@@ -111,3 +111,4 @@ class UpdateProfileForm(FlaskForm):
     last_name = StringField('Last Name', validators=[DataRequired(),Length(max=25)])
     phone_number = StringField('Contact No.',validators=[DataRequired(),Length(10)])
     submit = SubmitField('Update Profile')
+    

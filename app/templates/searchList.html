@@ -43,25 +43,6 @@
     <button class="border btn btn-primary" type="submit">Search</button>
   </form>
 <div class="searchList d-flex w-100 ">
-    <div class="filter col-md-2 bg-light rounded-lg position-fixed m-2">
-        <h5>Apartment Type</h5> 
-        <div class="apartment-type d-flex flex-wrap">
-            <a class="p-1 bg-info m-1 rounded-lg text-white">1 BHK</a>
-            <a class="p-1 bg-info m-1 rounded-lg text-white">2 BHK</a>
-            <a class="p-1 bg-info m-1 rounded-lg text-white">3 BHK</a>
-            <a class="p-1 bg-info m-1 rounded-lg text-white">4 BHK</a>
-        </div>
-        <h5>Price Type</h5>
-        <div class="price-type d-flex flex-wrap">
-            <a class="p-1 bg-warning m-1 rounded-lg text-white">Lowest-Highest</a>
-            <a class="p-1 bg-warning m-1 rounded-lg text-white">Highest-Lowest</a>
-        </div>
-        <h5>Tenant</h5>
-        <div class="tenant-type d-flex flex-wrap">
-            <a class="p-1 bg-success m-1 rounded-lg text-white">Family</a>
-            <a class="p-1 bg-success m-1 rounded-lg text-white">Bachelors</a>
-        </div>
-    </div>
     <div class="items col-md-9 d-flex flex-column m-2">
         {% for item in data %}
         <div class="item d-flex justify-content-center my-2">

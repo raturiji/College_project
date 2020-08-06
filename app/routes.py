@@ -58,7 +58,7 @@ def search():
             type = "%{}%".format(request.form['type'])
             state = "%{}%".format(request.form['state'])
             data = Property.query.filter(and_(Property.city.like(city),Property.state.like(state),Property.type.like(type))).all()
-        return render_template('searchList.html',title='Search',data=data,propertyImages = propertyImages,Impression=Impression,id=current_user.id,User=User)
+        return render_template('searchList.html',title='Search',data=data,propertyImages = propertyImages,Impression=Impression,id=current_user,User=User)
     return render_template('searchList.html',title='Search')
 
 
@@ -209,7 +209,7 @@ def sendImpression(propertyId,city,state):
         print(propertyId)
         print(city)
         print(state)
-        print(User.id)
+        print('working')
         redirectCity = "%{}%".format(city)
         redirectState = "%{}%".format(state)
         data = Property.query.filter(and_(Property.city.like(city),Property.state.like(state))).all()
@@ -221,7 +221,6 @@ def sendImpression(propertyId,city,state):
             db.session.commit()
             flash(f'Your impression has been recorded to the owner','success')
             return render_template('searchList.html',title='Search',data=data,propertyImages = propertyImages,Impression=Impression,id=current_user.id,User=User)
-
     else:
         return redirect('home')
 

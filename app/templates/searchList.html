@@ -46,22 +46,21 @@
     <div class="filter col-md-2 bg-light rounded-lg position-fixed m-2">
         <h5>Apartment Type</h5> 
         <div class="apartment-type d-flex flex-wrap">
-            <small class="p-1 bg-info m-1 rounded-lg text-white">1 BHK</small>
-            <small class="p-1 bg-info m-1 rounded-lg text-white">2 BHK</small>
-            <small class="p-1 bg-info m-1 rounded-lg text-white">3 BHK</small>
-            <small class="p-1 bg-info m-1 rounded-lg text-white">4 BHK</small>
+            <a class="p-1 bg-info m-1 rounded-lg text-white">1 BHK</a>
+            <a class="p-1 bg-info m-1 rounded-lg text-white">2 BHK</a>
+            <a class="p-1 bg-info m-1 rounded-lg text-white">3 BHK</a>
+            <a class="p-1 bg-info m-1 rounded-lg text-white">4 BHK</a>
         </div>
         <h5>Price Type</h5>
         <div class="price-type d-flex flex-wrap">
-            <small class="p-1 bg-warning m-1 rounded-lg text-white">Lowest-Highest</small>
-            <small class="p-1 bg-warning m-1 rounded-lg text-white">Highest-Lowest</small>
+            <a class="p-1 bg-warning m-1 rounded-lg text-white">Lowest-Highest</a>
+            <a class="p-1 bg-warning m-1 rounded-lg text-white">Highest-Lowest</a>
         </div>
         <h5>Tenant</h5>
         <div class="tenant-type d-flex flex-wrap">
-            <small class="p-1 bg-success m-1 rounded-lg text-white">Family</small>
-            <small class="p-1 bg-success m-1 rounded-lg text-white">Bachelors</small>
+            <a class="p-1 bg-success m-1 rounded-lg text-white">Family</a>
+            <a class="p-1 bg-success m-1 rounded-lg text-white">Bachelors</a>
         </div>
-        <small class="p-1 bg-primary m-1 rounded-lg text-white">Submit</small>
     </div>
     <div class="items col-md-9 d-flex flex-column m-2">
         {% for item in data %}
@@ -96,17 +95,23 @@
                 <div class="item-price">
                     <h4>&#x20B9 {{item.price}}</h4>
                 </div>
-                {%  if Impression.query.filter_by(property_id=item.id,user_id=id).first().status == 'Pending' %}
-                   <button type="button" class="btn-sm btn-danger text-white" data-toggle="modal" data-target="#exampleModal">
-                    Waiting For Response
-                   </button>   
-                {% elif Impression.query.filter_by(property_id=item.id,user_id=id).first().status == 'Accepted' %}
-                   <p>{{ User.query.filter_by(id=item.user_id).first().email }}</p>
-                   <p>{{ User.query.filter_by(id=item.user_id).first().phone_number }}</p>
-                {%  elif Impression.query.filter_by(property_id=item.id,user_id=id).first() == None %}
-                <a class="btn-sm btn-danger text-white" href="{{ url_for('sendImpression',propertyId=item.id,city=item.city,state=item.state) }}">
-                    Get Owner Details
-                </a>
+                {% if id.is_authenticated %}
+                    {%  if Impression.query.filter_by(property_id=item.id,user_id=id.id).first().status == 'Pending' %}
+                    <button type="button" class="btn-sm btn-danger text-white" data-toggle="modal" data-target="#exampleModal">
+                        Waiting For Response
+                    </button>   
+                    {% elif Impression.query.filter_by(property_id=item.id,user_id=id.id).first().status == 'Accepted' %}
+                    <p>{{ User.query.filter_by(id=item.user_id).first().email }}</p>
+                    <p>{{ User.query.filter_by(id=item.user_id).first().phone_number }}</p>
+                    {%  elif Impression.query.filter_by(property_id=item.id,user_id=id.id).first() == None %}
+                    <a class="btn-sm btn-danger text-white" href="{{ url_for('sendImpression',propertyId=item.id,city=item.city,state=item.state) }}">
+                        Get Owner Details
+                    </a>
+                    {% endif %}
+                {% else %}
+                    <a class="btn-sm btn-danger text-white" href="{{ url_for('login') }}">
+                        Get Owner Details
+                    </a>
                 {% endif %}
             </div>
         </div>
@@ -115,11 +120,6 @@
 </div>
 <script>
    
-    function redirectrequest(id,city,state){
-        console.log(id,city,state)
-        window.location.href=`http://127.0.0.1:5000/sendImpression/${id}/${city}/${state}` 
-    }
-
     function slideShow() {
         var i;
         var slides = document.getElementsByClassName("item-image"); 
